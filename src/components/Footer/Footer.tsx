@@ -1,5 +1,5 @@
 import { ToastContainer, toast } from 'react-toastify'
-import { Typography } from 'antd'
+import { Typography, Col } from 'antd'
 import { MailOutlined, WhatsAppOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 
