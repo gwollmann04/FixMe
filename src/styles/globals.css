@@ -5,35 +5,76 @@ body {
   margin: 0px;
 }
 
-.ant-typography a{
+.ant-typography a {
   color: #cdcdcd;
 }
-.ant-typography a:hover{
+.ant-typography a:hover {
   color: #696969;
 }
 
-.ant-layout .ant-layout-sider-trigger{
+.ant-layout .ant-layout-sider-trigger {
   position: relative;
 }
 
-.ant-typography, .ant-typography h1, .ant-typography h2, .ant-typography h3{
+.ant-typography,
+.ant-typography h1,
+.ant-typography h2,
+.ant-typography h3 {
   margin: 0px;
   color: #cdcdcd;
 }
 
-.ant-menu .ant-menu-item .ant-menu-item-icon{
+.ant-menu .ant-menu-item .ant-menu-item-icon {
   font-size: 20px;
 }
 
-.ant-menu-inline.ant-menu-root .ant-menu-item >.ant-menu-title-content {
+.ant-menu-inline.ant-menu-root .ant-menu-item > .ant-menu-title-content {
   font-size: 16px;
+}
+
+.ant-col > .ant-typography {
+  padding: 6px 26px;
+  text-align: center;
+  color: #001529;
+}
+
+.ant-divider-horizontal {
+  margin: 6px;
+  border-top: 1px solid #001529;
+}
+
+@media screen and (min-width: 1301px) {
+  .ant-image {
+    width: 500px;
+  }
+  .ant-col > .ant-typography {
+    font-size: 2vw;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .ant-col > .ant-typography {
+    font-size: 3vw;
+  }
+  .ant-image {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .ant-col > .ant-typography {
+    font-size: 4vw;
+  }
+  .ant-image {
+    width: 300px;
+  }
 }
 
 .Toastify {
   font-size: 16px;
 }
 
-.fade-in-image {
+.fade-in-animation {
   animation: fadeIn 5s;
   -webkit-animation: fadeIn 5s;
   -moz-animation: fadeIn 5s;
@@ -42,26 +83,46 @@ body {
 }
 
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-moz-keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-o-keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-ms-keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

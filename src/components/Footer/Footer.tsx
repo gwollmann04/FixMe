@@ -1,5 +1,5 @@
 import { ToastContainer, toast } from 'react-toastify'
-import { Typography, Col } from 'antd'
+import { Typography } from 'antd'
 import { MailOutlined, WhatsAppOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 
@@ -47,7 +47,8 @@ const Footer = () => {
       <Typography style={{ fontSize: '16px' }}>
         © 2023 Copyright:
         <Link
-          onClick={(event) => notify(event)}
+          rel="noopener noreferrer"
+          target="_blank"
           href="https://github.com/gwollmann04"
         >
           {' '}

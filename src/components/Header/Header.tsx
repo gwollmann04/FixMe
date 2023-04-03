@@ -42,7 +42,7 @@ const Header = () => {
         condition={!xs}
         component={
           <Title style={{ color: '#cdcdcd', margin: '0px' }} level={3}>
-            Monitoramente e conserto de equipamentos
+            Monitoramento e conserto de equipamentos
           </Title>
         }
       />

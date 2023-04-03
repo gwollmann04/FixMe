@@ -1,4 +1,4 @@
-import { Image, Row, Typography, Col } from 'antd'
+import { Image, Row, Typography, Col, Divider } from 'antd'
 
 const HomeComponent = () => {
   return (
@@ -6,22 +6,33 @@ const HomeComponent = () => {
       style={{
         display: 'flex',
         width: '100%',
+        background: '#cdcdcd',
       }}
       justify="space-around"
       align="middle"
+      className="fade-in-animation"
     >
       <Image
-        className="fade-in-image"
-        width={400}
         src="/home_logo.png"
         preview={false}
+        style={{
+          borderRadius: '40%',
+          padding: '12px',
+          boxShadow: '1px 1px 30px 5px #001529',
+          background: '#001529',
+        }}
         alt="Home Logo"
       />
-      <Col style={{ marginRight: '20%' }}>
-        <Typography>Teste </Typography>
-        <Typography>Teste </Typography>
-        <Typography>Teste </Typography>
-        <Typography>Teste </Typography>
+      <Col style={{padding: '12px'}}>
+        <Typography>Há mais de 30 anos no mercado </Typography>
+        <Divider />
+        <Typography>Referência no monitoramento de equipamentos </Typography>
+        <Divider />
+        <Typography>Ambiente centralizado com todas informações </Typography>
+        <Divider />
+        <Typography>
+          Viabilizando dinamismo para realização dos reparos{' '}
+        </Typography>
       </Col>
     </Row>
   )
