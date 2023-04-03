@@ -9,6 +9,7 @@ import {
 } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Layout, Menu, Grid } from 'antd'
+import { useRouter } from 'next/router'
 
 const { Sider } = Layout
 const { useBreakpoint } = Grid
@@ -36,7 +37,9 @@ const items: MenuItem[] = [
 
 const NavBar: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false)
+  
   const { xs } = useBreakpoint()
+  const router = useRouter()
 
   return (
     <Sider
@@ -50,7 +53,7 @@ const NavBar: React.FC = () => {
         defaultSelectedKeys={['1']}
         mode="inline"
         items={items}
-        onSelect={({ key }) => console.log(key)}
+        onSelect={({ key }) => router.push(key)}
       />
     </Sider>
   )

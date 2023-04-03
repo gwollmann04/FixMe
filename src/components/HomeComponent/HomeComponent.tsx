@@ -23,7 +23,7 @@ const HomeComponent = () => {
         }}
         alt="Home Logo"
       />
-      <Col style={{padding: '12px'}}>
+      <Col style={{ padding: '12px' }}>
         <Typography>Há mais de 30 anos no mercado </Typography>
         <Divider />
         <Typography>Referência no monitoramento de equipamentos </Typography>

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { Typography, Grid } from 'antd'
 import { ToolOutlined } from '@ant-design/icons'
-import { IfComponent } from '../IfComponent'
+import { IfComponent } from '@/src/components'
 
 const { useBreakpoint } = Grid
 const { Title } = Typography
