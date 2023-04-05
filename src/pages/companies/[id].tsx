@@ -4,13 +4,14 @@ import { GetServerSideProps } from 'next'
 import { Companies } from '@/src/components'
 
 const CompaniesPage: FC = (props) => {
+    console.log(props)
   return <Companies {...props} />
 }
 
 export default CompaniesPage
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return {
-    props: {},
+    props: { id: query.id },
   }
 }

@@ -1,9 +1,16 @@
-import React from 'react'
+import { FC } from 'react'
+import { GetServerSideProps } from 'next'
 
 import { HomeComponent } from '@/src/components'
 
-const App: React.FC = () => {
-  return <HomeComponent />
+const Home: FC = (props) => {
+  return <HomeComponent {...props} />
 }
 
-export default App
+export default Home
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    props: {},
+  }
+}

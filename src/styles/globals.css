@@ -12,6 +12,10 @@ body {
   color: #696969;
 }
 
+.ant-layout {
+  background-color: #cdcdcd;
+}
+
 .ant-layout .ant-layout-sider-trigger {
   position: relative;
 }
@@ -32,6 +36,13 @@ body {
   font-size: 16px;
 }
 
+.ant-spin-spinning {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
 .ant-col > .ant-typography {
   padding: 6px 26px;
   text-align: center;
@@ -43,9 +54,14 @@ body {
   border-top: 1px solid #001529;
 }
 
+.ant-row {
+  display: flex;
+  width: 100%;
+}
+
 @media screen and (min-width: 1301px) {
   .ant-image {
-    width: 500px;
+    width: 35%;
   }
   .ant-col > .ant-typography {
     font-size: 2vw;
@@ -57,7 +73,7 @@ body {
     font-size: 3vw;
   }
   .ant-image {
-    width: 400px;
+    width: 50%;
   }
 }
 
@@ -66,7 +82,7 @@ body {
     font-size: 4vw;
   }
   .ant-image {
-    width: 300px;
+    width: 70%;
   }
 }
 

@@ -2,16 +2,7 @@ import { Image, Row, Typography, Col, Divider } from 'antd'
 
 const HomeComponent = () => {
   return (
-    <Row
-      style={{
-        display: 'flex',
-        width: '100%',
-        background: '#cdcdcd',
-      }}
-      justify="space-around"
-      align="middle"
-      className="fade-in-animation"
-    >
+    <Row justify="space-around" align="middle" className="fade-in-animation">
       <Image
         src="/home_logo.png"
         preview={false}
