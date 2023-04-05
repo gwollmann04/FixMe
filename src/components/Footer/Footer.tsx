@@ -1,4 +1,4 @@
-import { ToastContainer, toast } from 'react-toastify'
+import {  toast } from 'react-toastify'
 import { Typography } from 'antd'
 import { MailOutlined, WhatsAppOutlined } from '@ant-design/icons'
 import Link from 'next/link'
@@ -55,7 +55,6 @@ const Footer = () => {
           github.com/gwollmann04
         </Link>
       </Typography>
-      <ToastContainer />
     </Typography>
   )
 }

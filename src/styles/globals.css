@@ -49,6 +49,15 @@ body {
   color: #001529;
 }
 
+.ant-modal .ant-modal-title {
+  color: #001529;
+  font-size: 24px;
+}
+
+.ant-btn > span {
+  font-size: 16px;
+}
+
 .ant-divider-horizontal {
   margin: 6px;
   border-top: 1px solid #001529;
@@ -60,17 +69,17 @@ body {
 }
 
 @media screen and (min-width: 1301px) {
-  .ant-image {
-    width: 35%;
-  }
   .ant-col > .ant-typography {
-    font-size: 2vw;
+    font-size: 36px;
   }
+}
+.ant-image {
+  width: 35%;
 }
 
 @media screen and (max-width: 1300px) {
   .ant-col > .ant-typography {
-    font-size: 3vw;
+    font-size: 30px;
   }
   .ant-image {
     width: 50%;
@@ -79,7 +88,7 @@ body {
 
 @media screen and (max-width: 700px) {
   .ant-col > .ant-typography {
-    font-size: 4vw;
+    font-size: 24px;
   }
   .ant-image {
     width: 70%;

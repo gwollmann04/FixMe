@@ -1,55 +1,29 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Typography, Row, Col, Grid, Divider, Switch, Image, Spin } from 'antd'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
+import { PlusCircleFilled } from '@ant-design/icons'
 
 import { api } from '@/src/providers/api'
 import { CompanyDataType } from '@/src/@types/companies'
 import { unstable_batchedUpdates } from 'react-dom'
+import { mockedCompaniesData } from '@/src/utils/constants'
+import { DeleteModal } from '@/src/components'
 
 const { useBreakpoint } = Grid
 
-const mockedData = [
-  {
-    id: 0,
-    name: 'The Test Company I',
-  },
-  {
-    id: 1,
-    name: 'The Test Company II',
-  },
-  {
-    id: 2,
-    name: 'The Test Company III',
-  },
-  {
-    id: 3,
-    name: 'The Test Company IV',
-  },
-  {
-    id: 4,
-    name: 'The Test Company V',
-  },
-  {
-    id: 5,
-    name: 'The Test Company VI',
-  },
-  {
-    id: 6,
-    name: 'The Test Company VII',
-  },
-]
 const Companies = () => {
   const [data, setData] = useState<CompanyDataType>()
   const [Apidata, setApiData] = useState<CompanyDataType>()
   const [isLoading, setIsLoading] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const { xl, lg } = useBreakpoint()
   const router = useRouter()
 
   const handleSelectedData = useCallback(() => {
     if (JSON.stringify(data) === JSON.stringify(Apidata)) {
-      setData(mockedData)
+      setData(mockedCompaniesData)
       return toast.success('Utilizando dados mockados.')
     }
 
@@ -86,16 +60,35 @@ const Companies = () => {
           right: '20px',
           top: '85px',
           zIndex: '1',
+          background: '#001529',
         }}
         defaultChecked
         onChange={handleSelectedData}
       />
+      <Typography
+        onClick={() => setIsModalOpen(true)}
+        style={{
+          position: 'absolute',
+          right: '80px',
+          top: '86px',
+          zIndex: '1',
+          fontSize: '18px',
+          background: '#001529',
+          borderRadius: '10px',
+          padding: '2px 4px',
+          cursor: 'pointer',
+          display: 'flex',
+        }}
+      >
+        Nova empresa <PlusCircleFilled style={{ marginLeft: '6px' }} />
+      </Typography>
       <Col style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
         <Typography
-          color="#f9f9f9"
+          color="#001529"
           style={{
-            fontSize: lg ? '3vw' : '5vw',
+            fontSize: '30px',
             padding: '10px 0px',
+            marginTop: '20px',
           }}
         >
           Empresas parceiras
@@ -131,7 +124,7 @@ const Companies = () => {
               <Divider style={{ margin: '0px' }} />
               <Typography
                 style={{
-                  fontSize: xl ? '1.5vw' : lg ? '2vw ' : '3.5vw',
+                  fontSize: '24px',
                   padding: '10px 0px',
                 }}
               >
@@ -140,8 +133,8 @@ const Companies = () => {
             </Col>
           ))}
         </Row>
-        <ToastContainer />
       </Col>
+      <DeleteModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} />
     </>
   )
 }

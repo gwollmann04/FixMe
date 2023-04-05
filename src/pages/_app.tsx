@@ -2,6 +2,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import '@/src/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { ConfigProvider, Layout } from 'antd'
+import { ToastContainer, Slide } from "react-toastify";
 
 import { NavBar, Footer, Header } from '@/src/components'
 
@@ -22,6 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </Layout>
         <Footer />
       </Layout>
+      <ToastContainer transition={Slide}/>
     </ConfigProvider>
   )
 }
