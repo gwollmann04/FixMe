@@ -8,11 +8,14 @@ import { UnitDataFormattedType } from '@/src/@types/units'
 import { api } from '@/src/providers/api'
 import { DeleteModal, EditUnitModal } from '@/src/components'
 import { convertArrayToObject } from '@/src/utils/formatters'
+import { CompanyDataType } from '@/src/@types/companies'
+import { unstable_batchedUpdates } from 'react-dom'
 
 const { useBreakpoint } = Grid
 
 const UnitInternal = ({ id }: ParsedUrlQuery) => {
   const [data, setData] = useState<UnitDataFormattedType>()
+  const [companies, setCompanies] = useState<Array<CompanyDataType>>()
   const [isLoading, setIsLoading] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
@@ -27,12 +30,15 @@ const UnitInternal = ({ id }: ParsedUrlQuery) => {
 
       const companyNameArray = convertArrayToObject(response.data, 'id')
 
-      const formattedUnits ={
+      const formattedUnits = {
         ...data,
         companyName: companyNameArray[data.companyId],
       }
 
-      return setData(formattedUnits)
+      unstable_batchedUpdates(() => {
+        setCompanies(response?.data)
+        setData(formattedUnits)
+      })
     } catch {
       toast.error('Falha ao carregar dados da unidade.')
     } finally {
@@ -107,7 +113,7 @@ const UnitInternal = ({ id }: ParsedUrlQuery) => {
           </Typography>
           <Divider />
           <Typography style={{ justifyContent: 'flex-start' }}>
-           Empresa: <Typography>{data?.companyName}</Typography>
+            Empresa: <Typography>{data?.companyName}</Typography>
           </Typography>
           <Divider />
           <Typography style={{ justifyContent: 'flex-start' }}>
@@ -124,6 +130,7 @@ const UnitInternal = ({ id }: ParsedUrlQuery) => {
         isModalOpen={isEditModalOpen}
         id={String(id)}
         unitData={data as UnitDataFormattedType}
+        companies={companies as Array<CompanyDataType>}
       />
       <DeleteModal
         setIsModalOpen={setIsDeleteModalOpen}

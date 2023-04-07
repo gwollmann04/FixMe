@@ -8,10 +8,15 @@ import { api } from '@/src/providers/api'
 import { UserDataType, UserDataFormattedType } from '@/src/@types/users'
 import { AddUserModal } from '@/src/components'
 import { convertArrayToObject } from '@/src/utils/formatters'
+import { unstable_batchedUpdates } from 'react-dom'
+import { CompanyDataType } from '@/src/@types/companies'
+import { UnitDataType } from '@/src/@types/units'
 
 const Units = () => {
   const [data, setData] = useState<Array<UserDataFormattedType>>()
   const [isLoading, setIsLoading] = useState(false)
+  const [companies, setCompanies] = useState<Array<CompanyDataType>>()
+  const [units, setUnits] = useState<Array<UnitDataType>>()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const router = useRouter()
@@ -35,7 +40,11 @@ const Units = () => {
         unitName: unitNameArray[unit.unitId],
       }))
 
-      setData(formattedUnits)
+      unstable_batchedUpdates(() => {
+        setData(formattedUnits)
+        setCompanies(responseCompanies?.data)
+        setUnits(responseUnits?.data)
+      })
     } catch {
       toast.error('Falha ao carregar as unidades.')
     } finally {
@@ -95,7 +104,7 @@ const Units = () => {
                 boxShadow: '1px 1px 8px 1px #000000',
                 color: '#001529',
                 padding: '6px',
-                cursor: 'pointer'
+                cursor: 'pointer',
               }}
             >
               <Typography style={{ color: '#001529', fontSize: '16px' }}>
@@ -111,7 +120,12 @@ const Units = () => {
           ))}
         </Row>
       </Col>
-      <AddUserModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} />
+      <AddUserModal
+        setIsModalOpen={setIsModalOpen}
+        isModalOpen={isModalOpen}
+        companies={companies as Array<CompanyDataType>}
+        units={units as Array<UnitDataType>}
+      />
     </>
   )
 }

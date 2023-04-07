@@ -8,6 +8,9 @@ import { UserDataFormattedType } from '@/src/@types/users'
 import { api } from '@/src/providers/api'
 import { DeleteModal, EditUserModal } from '@/src/components'
 import { convertArrayToObject } from '@/src/utils/formatters'
+import { CompanyDataType } from '@/src/@types/companies'
+import { UnitDataType } from '@/src/@types/units'
+import { unstable_batchedUpdates } from 'react-dom'
 
 const { useBreakpoint } = Grid
 
@@ -16,6 +19,8 @@ const UserInternal = ({ id }: ParsedUrlQuery) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+  const [companies, setCompanies] = useState<Array<CompanyDataType>>()
+  const [units, setUnits] = useState<Array<UnitDataType>>()
 
   const { xs } = useBreakpoint()
 
@@ -38,7 +43,11 @@ const UserInternal = ({ id }: ParsedUrlQuery) => {
         unitName: unitNameArray[data.unitId],
       }
 
-      return setData(formattedUnits)
+      unstable_batchedUpdates(() => {
+        setData(formattedUnits)
+        setCompanies(responseCompanies?.data)
+        setUnits(responseUnits?.data)
+      })
     } catch {
       toast.error('Falha ao carregar dados do usuário.')
     } finally {
@@ -130,6 +139,8 @@ const UserInternal = ({ id }: ParsedUrlQuery) => {
         isModalOpen={isEditModalOpen}
         id={String(id)}
         userData={data as UserDataFormattedType}
+        companies={companies as Array<CompanyDataType>}
+        units={units as Array<UnitDataType>}
       />
       <DeleteModal
         setIsModalOpen={setIsDeleteModalOpen}

@@ -4,27 +4,22 @@ import type { FormInstance } from 'antd/es/form'
 import { toast } from 'react-toastify'
 
 import { api } from '@/src/providers/api'
-import { UserDataFormattedType, createUserDataType } from '@/src/@types/users'
-import { CompanyDataType } from '@/src/@types/companies'
-import { UnitDataType } from '@/src/@types/units'
+import { FormattedWorkOrderDataType, editWorkOrderDataType } from '@/src/@types/workorders'
+import { prioritys, workOrderStatus } from '@/src/utils/constants'
 
 const { Option } = Select
 interface ModalProps {
   isModalOpen: boolean
   setIsModalOpen: Dispatch<SetStateAction<boolean>>
   id: string
-  userData: UserDataFormattedType
-  companies: Array<CompanyDataType>
-  units: Array<UnitDataType>
+  userData: FormattedWorkOrderDataType
 }
 
-const EditUserModal = ({
+const EditWorkOrderModal = ({
   isModalOpen,
   setIsModalOpen,
   id,
-  userData,
-  units,
-  companies,
+  userData
 }: ModalProps) => {
   const [isLoading, setIsLoading] = useState(false)
 
@@ -35,19 +30,18 @@ const EditUserModal = ({
   }
 
   const onFinish = async ({
-    name,
-    unitId,
-    companyId,
-    email,
-  }: createUserDataType) => {
+    description,
+    priority,
+    status,
+  }: editWorkOrderDataType) => {
     setIsLoading(true)
 
     formRef.current?.resetFields()
     try {
-      await api.put(`/users/${id}`, { name, unitId, companyId, email })
-      toast.success('Usuário editado com sucesso.')
+      await api.put(`/workorders/${id}`, { description, priority, status })
+      toast.success('Ordem de serviço editado com sucesso.')
     } catch {
-      toast.error('Erro ao editar usuário, tente novamente.')
+      toast.error('Erro ao editar ordem de serviço, tente novamente.')
     } finally {
       handleCloseModal()
       setIsLoading(false)
@@ -57,7 +51,7 @@ const EditUserModal = ({
   return (
     <>
       <Modal
-        title="Editar usuário"
+        title="Editar ordem de serviço"
         open={isModalOpen}
         onOk={handleCloseModal}
         onCancel={handleCloseModal}
@@ -74,53 +68,45 @@ const EditUserModal = ({
             ref={formRef}
           >
             <Form.Item
-              label="Nome"
-              name="name"
-              initialValue={userData?.name}
+              label="Descrição"
+              name="description"
+              initialValue={userData?.description}
               style={{ maxWidth: '100%' }}
-              rules={[{ required: true, message: 'Insira o nome da unidade' }]}
+              rules={[{ required: true, message: 'Insira a descrição' }]}
             >
               <Input />
             </Form.Item>
             <Form.Item
               style={{ maxWidth: '100%' }}
-              name="companyId"
-              initialValue={userData?.companyId}
-              label="Nome da empresa"
-              rules={[{ required: true, message: 'Escolha a empresa' }]}
+              name="priority"
+              initialValue={userData?.priority}
+              label="Prioridade"
+              rules={[{ required: true, message: 'Defina a prioridade' }]}
             >
-              <Select placeholder="Selecione a empresa" allowClear>
-                {companies?.map((company: CompanyDataType) => (
-                  <Option key={company?.id} value={company?.id}>
-                    {company?.name}
+              <Select placeholder="Selecione a prioridade" allowClear>
+                {prioritys?.map((priority) => (
+                  <Option key={priority?.value} value={priority?.value}>
+                    {priority?.label}
                   </Option>
                 ))}
               </Select>
             </Form.Item>
             <Form.Item
               style={{ maxWidth: '100%' }}
-              initialValue={userData?.unitId}
-              name="unitId"
-              label="Nome da unidade"
-              rules={[{ required: true, message: 'Escolha a unidade' }]}
+              name="status"
+              initialValue={userData?.status}
+              label="Status"
+              rules={[{ required: true, message: 'Defina o status' }]}
             >
-              <Select placeholder="Selecione a unidade" allowClear>
-                {units?.map((unit: CompanyDataType) => (
-                  <Option key={unit?.id} value={unit?.id}>
-                    {unit?.name}
+              <Select placeholder="Selecione o status" allowClear>
+                {workOrderStatus?.map((status) => (
+                  <Option key={status?.value} value={status?.value}>
+                    {status?.label}
                   </Option>
                 ))}
               </Select>
             </Form.Item>
-            <Form.Item
-              label="Email"
-              initialValue={userData?.email}
-              name="email"
-              style={{ maxWidth: '100%' }}
-              rules={[{ required: true, message: 'Insira o email' }]}
-            >
-              <Input />
-            </Form.Item>
+
             <Form.Item style={{ justifyContent: 'flex-end', display: 'flex' }}>
               <Button
                 key="back"
@@ -147,4 +133,4 @@ const EditUserModal = ({
   )
 }
 
-export default EditUserModal
+export default EditWorkOrderModal

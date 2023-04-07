@@ -4,25 +4,19 @@ import type { FormInstance } from 'antd/es/form'
 import { toast } from 'react-toastify'
 
 import { api } from '@/src/providers/api'
-import { createUserDataType } from '@/src/@types/users'
-import { CompanyDataType } from '@/src/@types/companies'
-import { UnitDataType } from '@/src/@types/units'
+import { prioritys } from '@/src/utils/constants'
+import { createWorkOrderDataType } from '@/src/@types/workorders'
+import { AssetsDataType } from '@/src/@types/assets'
 
 const { Option } = Select
 
 interface ModalProps {
   isModalOpen: boolean
   setIsModalOpen: Dispatch<SetStateAction<boolean>>
-  companies: Array<CompanyDataType>
-  units: Array<UnitDataType>
+  assets: Array<AssetsDataType>
 }
 
-const AddUserModal = ({
-  isModalOpen,
-  setIsModalOpen,
-  companies,
-  units,
-}: ModalProps) => {
+const AddWorkOrderModal = ({ isModalOpen, setIsModalOpen, assets }: ModalProps) => {
   const [isLoading, setIsLoading] = useState(false)
 
   const formRef = useRef<FormInstance>(null)
@@ -32,18 +26,25 @@ const AddUserModal = ({
   }
 
   const onFinish = async ({
-    name,
-    companyId,
-    unitId,
-    email,
-  }: createUserDataType) => {
+    description,
+    title,
+    priority,
+    usersNumber,
+    assetId,
+  }: createWorkOrderDataType) => {
     setIsLoading(true)
     formRef.current?.resetFields()
     try {
-      await api.post('/users', { name, companyId, unitId, email })
-      toast.success('Usuário criado com sucesso.')
+      await api.post('/workorders', {
+        description,
+        title,
+        priority,
+        usersNumber,
+        assetId,
+      })
+      toast.success('Ordem de serviço criada com sucesso.')
     } catch {
-      toast.error('Erro ao criar usuário, tente novamente.')
+      toast.error('Erro ao criar ordem de serviço, tente novamente.')
     } finally {
       handleCloseModal()
       setIsLoading(false)
@@ -52,7 +53,7 @@ const AddUserModal = ({
 
   return (
     <Modal
-      title="Adicionar usuário"
+      title="Adicionar ordem de serviço"
       open={isModalOpen}
       onOk={handleCloseModal}
       onCancel={handleCloseModal}
@@ -69,48 +70,56 @@ const AddUserModal = ({
           ref={formRef}
         >
           <Form.Item
-            label="Nome"
-            name="name"
+            label="Título"
+            name="title"
             style={{ maxWidth: '100%' }}
-            rules={[{ required: true, message: 'Insira o nome da unidade' }]}
+            rules={[{ required: true, message: 'Insira o título' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Descrição"
+            name="description"
+            style={{ maxWidth: '100%' }}
+            rules={[{ required: true, message: 'Insira a descrição' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Nº de usuários"
+            name="usersNumber"
+            style={{ maxWidth: '100%' }}
+            rules={[{ required: true, message: 'Insira o número de usuários' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             style={{ maxWidth: '100%' }}
-            name="companyId"
-            label="Nome da empresa"
-            rules={[{ required: true, message: 'Escolha a empresa' }]}
+            name="priority"
+            label="Prioridade"
+            rules={[{ required: true, message: 'Defina a prioridade' }]}
+          >
+            <Select placeholder="Selecione a prioridade" allowClear>
+              {prioritys?.map((priority) => (
+                <Option key={priority?.value} value={priority?.value}>
+                  {priority?.label}
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item
+            style={{ maxWidth: '100%' }}
+            name="assetId"
+            label="Equipamento"
+            rules={[{ required: true, message: 'Escolha o equipamento' }]}
           >
             <Select placeholder="Selecione a empresa" allowClear>
-              {companies?.map((company: CompanyDataType) => (
-                <Option key={company?.id} value={company?.id}>
-                  {company?.name}
+              {assets?.map((asset : AssetsDataType) => (
+                <Option key={asset?.id} value={asset?.id}>
+                  {asset?.name}
                 </Option>
               ))}
             </Select>
-          </Form.Item>
-          <Form.Item
-            style={{ maxWidth: '100%' }}
-            name="unitId"
-            label="Nome da unidade"
-            rules={[{ required: true, message: 'Escolha a unidade' }]}
-          >
-            <Select placeholder="Selecione a unidade" allowClear>
-              {units?.map((unit: CompanyDataType) => (
-                <Option key={unit?.id} value={unit?.id}>
-                  {unit?.name}
-                </Option>
-              ))}
-            </Select>
-          </Form.Item>
-          <Form.Item
-            label="Email"
-            name="email"
-            style={{ maxWidth: '100%' }}
-            rules={[{ required: true, message: 'Insira o email' }]}
-          >
-            <Input />
           </Form.Item>
           <Form.Item style={{ justifyContent: 'flex-end', display: 'flex' }}>
             <Button
@@ -137,4 +146,4 @@ const AddUserModal = ({
   )
 }
 
-export default AddUserModal
+export default AddWorkOrderModal

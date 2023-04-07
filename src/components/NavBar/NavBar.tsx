@@ -32,7 +32,7 @@ const items: MenuItem[] = [
   getMenuOption('Unidades', '/units', <ShopOutlined />),
   getMenuOption('Usuários', '/users', <UserOutlined />),
   getMenuOption('Equipamentos', '/assets', <ToolOutlined />),
-  getMenuOption('Ordens de Serviço', '/workorders', <UnorderedListOutlined />),
+  getMenuOption('Ordens de Serviço', '/work-orders', <UnorderedListOutlined />),
 ]
 
 const NavBar: React.FC = () => {

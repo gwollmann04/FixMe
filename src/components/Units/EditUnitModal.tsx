@@ -1,17 +1,19 @@
-import { Button, Modal, Input, Form, Spin } from 'antd'
+import { Button, Modal, Input, Form, Spin, Select } from 'antd'
 import { Dispatch, SetStateAction, useRef, useState } from 'react'
 import type { FormInstance } from 'antd/es/form'
 import { toast } from 'react-toastify'
 
 import { api } from '@/src/providers/api'
-import { createCompanyDataType } from '@/src/@types/companies'
+import { CompanyDataType, createCompanyDataType } from '@/src/@types/companies'
 import { UnitDataFormattedType } from '@/src/@types/units'
 
+const { Option } = Select
 interface ModalProps {
   isModalOpen: boolean
   setIsModalOpen: Dispatch<SetStateAction<boolean>>
   id: string
   unitData: UnitDataFormattedType
+  companies: Array<CompanyDataType>
 }
 
 const EditUnitModal = ({
@@ -19,6 +21,7 @@ const EditUnitModal = ({
   setIsModalOpen,
   id,
   unitData,
+  companies,
 }: ModalProps) => {
   const [isLoading, setIsLoading] = useState(false)
 
@@ -28,12 +31,12 @@ const EditUnitModal = ({
     setIsModalOpen(false)
   }
 
-  const onFinish = async ({ name }: createCompanyDataType) => {
+  const onFinish = async ({ name, companyId }: createCompanyDataType) => {
     setIsLoading(true)
 
     formRef.current?.resetFields()
     try {
-      await api.put(`/units/${id}`, { name })
+      await api.put(`/units/${id}`, { name, companyId })
       toast.success('Unidade editada com sucesso.')
     } catch {
       toast.error('Erro ao editar unidade, tente novamente.')
@@ -72,13 +75,19 @@ const EditUnitModal = ({
               <Input />
             </Form.Item>
             <Form.Item
-              label="Nome da empresa"
-              name="companyName"
-              initialValue={unitData?.companyName}
               style={{ maxWidth: '100%' }}
-              rules={[{ required: true, message: 'Insira o nome da empresa' }]}
+              initialValue={unitData?.companyId}
+              name="companyId"
+              label="Nome da empresa"
+              rules={[{ required: true, message: 'Escolha a empresa' }]}
             >
-              <Input />
+              <Select placeholder="Selecione a empresa" allowClear>
+                {companies?.map((company: CompanyDataType) => (
+                  <Option key={company?.id} value={company?.id}>
+                    {company?.name}
+                  </Option>
+                ))}
+              </Select>
             </Form.Item>
             <Form.Item style={{ justifyContent: 'flex-end', display: 'flex' }}>
               <Button

@@ -13,6 +13,6 @@ export declare type UnitDataType = {
 
   export declare type createUnitDataType = {
     name: string
-    companyName: string
+    companyId: string
   }
   

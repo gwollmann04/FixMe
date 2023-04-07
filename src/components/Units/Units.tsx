@@ -10,12 +10,14 @@ import { unstable_batchedUpdates } from 'react-dom'
 import { mockedUnitsData } from '@/src/utils/constants'
 import { AddUnitModal } from '@/src/components'
 import { convertArrayToObject } from '@/src/utils/formatters'
+import { CompanyDataType } from '@/src/@types/companies'
 
 const { useBreakpoint } = Grid
 
 const Units = () => {
   const [data, setData] = useState<Array<UnitDataFormattedType>>()
   const [apiData, setApiData] = useState<Array<UnitDataFormattedType>>()
+  const [companies, setCompanies] = useState<Array<CompanyDataType>>()
   const [isLoading, setIsLoading] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -45,6 +47,7 @@ const Units = () => {
       }))
 
       unstable_batchedUpdates(() => {
+        setCompanies(response?.data)
         setApiData(formattedUnits)
         setData(formattedUnits)
       })
@@ -142,7 +145,7 @@ const Units = () => {
               <Typography
                 style={{
                   fontSize: '18px',
-                  padding: '0px'
+                  padding: '0px',
                 }}
               >
                 Empresa: {item.companyName}
@@ -151,7 +154,11 @@ const Units = () => {
           ))}
         </Row>
       </Col>
-      <AddUnitModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} />
+      <AddUnitModal
+        setIsModalOpen={setIsModalOpen}
+        isModalOpen={isModalOpen}
+        companies={companies as Array<CompanyDataType>}
+      />
     </>
   )
 }

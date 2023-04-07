@@ -19,7 +19,7 @@ export declare type UserDataFormattedType = {
 
   export declare type createUserDataType = {
     name: string
-    companyName: string
-    unitName: string
+    companyId: string
+    unitId: string
     email: string
   }

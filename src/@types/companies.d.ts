@@ -5,4 +5,5 @@ export declare type CompanyDataType = {
 
 export declare type createCompanyDataType = {
   name: string
+  companyId: number
 }
