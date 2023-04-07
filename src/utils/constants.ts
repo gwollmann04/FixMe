@@ -29,3 +29,48 @@ export const mockedCompaniesData = [
       name: 'The Test Company VII',
     },
   ]
+
+  export const mockedUnitsData = [
+    {
+      id: 0,
+      name: 'Unit I',
+      companyId: 1,
+      companyName: 'The Test Company I'
+    },
+    {
+      id: 1,
+      name: 'Unit II',
+      companyId: 1,
+      companyName: 'The Test Company I'
+    },
+    {
+      id: 2,
+      name: 'Unit III',
+      companyId: 1,
+      companyName: 'The Test Company I'
+    },
+    {
+      id: 3,
+      name: 'Unit IV',
+      companyId: 1,
+      companyName: 'The Test Company I'
+    },
+    {
+      id: 4,
+      name: 'Unit V',
+      companyId: 1,
+      companyName: 'The Test Company I'
+    },
+    {
+      id: 5,
+      name: 'Unit VI',
+      companyId: 1,
+      companyName: 'The Test Company I'
+    },
+    {
+      id: 6,
+      name: 'Unit VII',
+      companyId: 1,
+      companyName: 'The Test Company I'
+    },
+  ]

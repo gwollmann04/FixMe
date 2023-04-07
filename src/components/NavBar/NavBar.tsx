@@ -37,7 +37,7 @@ const items: MenuItem[] = [
 
 const NavBar: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false)
-  
+
   const { xs } = useBreakpoint()
   const router = useRouter()
 
@@ -53,7 +53,7 @@ const NavBar: React.FC = () => {
         defaultSelectedKeys={['1']}
         mode="inline"
         items={items}
-        onSelect={({ key }) => router.push(key)}
+        onClick={({ key }) => router.push(key)}
       />
     </Sider>
   )

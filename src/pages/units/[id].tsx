@@ -1,13 +1,13 @@
 import { FC } from 'react'
 import { GetServerSideProps } from 'next'
 
-import { CompanyInternal } from '@/src/components'
+import { UnitInternal } from '@/src/components'
 
-const CompanyPageInternal: FC = (props) => {
-  return <CompanyInternal {...props} />
+const UnitPageInteral: FC = (props) => {
+  return <UnitInternal {...props} />
 }
 
-export default CompanyPageInternal
+export default UnitPageInteral
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return {

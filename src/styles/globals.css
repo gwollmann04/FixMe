@@ -43,10 +43,23 @@ body {
   justify-content: center;
 }
 
+.ant-form-item .ant-form-item-control-input-content {
+  justify-content: flex-end;
+  display: flex;
+}
+
 .ant-col > .ant-typography {
   padding: 6px 26px;
-  text-align: center;
   color: #001529;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ant-col > .ant-typography > .ant-typography {
+  color: #001529;
+  margin-left: 6px;
+  margin-top: 6px;
 }
 
 .ant-modal .ant-modal-title {
@@ -72,14 +85,20 @@ body {
   .ant-col > .ant-typography {
     font-size: 36px;
   }
-}
-.ant-image {
-  width: 35%;
+  .ant-col > .ant-typography > .ant-typography {
+    font-size: 28px;
+  }
+  .ant-image {
+    width: 35%;
+  }
 }
 
 @media screen and (max-width: 1300px) {
   .ant-col > .ant-typography {
     font-size: 30px;
+  }
+  .ant-col > .ant-typography > .ant-typography {
+    font-size: 24px;
   }
   .ant-image {
     width: 50%;
@@ -89,6 +108,9 @@ body {
 @media screen and (max-width: 700px) {
   .ant-col > .ant-typography {
     font-size: 24px;
+  }
+  .ant-col > .ant-typography > .ant-typography {
+    margin-top: 0px;
   }
   .ant-image {
     width: 70%;

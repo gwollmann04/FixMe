@@ -5,16 +5,17 @@ import { useRouter } from 'next/router'
 import { PlusCircleFilled } from '@ant-design/icons'
 
 import { api } from '@/src/providers/api'
-import { CompanyDataType } from '@/src/@types/companies'
+import { UnitDataType, UnitDataFormattedType } from '@/src/@types/units'
 import { unstable_batchedUpdates } from 'react-dom'
-import { mockedCompaniesData } from '@/src/utils/constants'
-import { AddCompanyModal } from '@/src/components'
+import { mockedUnitsData } from '@/src/utils/constants'
+import { AddUnitModal } from '@/src/components'
+import { convertCompanyArrayToObject } from '@/src/utils/formatters'
 
 const { useBreakpoint } = Grid
 
-const Companies = () => {
-  const [data, setData] = useState<Array<CompanyDataType>>()
-  const [apiData, setApiData] = useState<Array<CompanyDataType>>()
+const Units = () => {
+  const [data, setData] = useState<Array<UnitDataFormattedType>>()
+  const [apiData, setApiData] = useState<Array<UnitDataFormattedType>>()
   const [isLoading, setIsLoading] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -23,7 +24,7 @@ const Companies = () => {
 
   const handleSelectedData = useCallback(() => {
     if (JSON.stringify(data) === JSON.stringify(apiData)) {
-      setData(mockedCompaniesData)
+      setData(mockedUnitsData)
       return toast.success('Utilizando dados mockados.')
     }
 
@@ -33,14 +34,22 @@ const Companies = () => {
   const loadData = useCallback(async () => {
     setIsLoading(true)
     try {
-      const { data } = await api.get('/companies')
+      const { data } = await api.get('/units')
+      const response = await api.get('/companies')
+
+      const companyNameArray = convertCompanyArrayToObject(response.data, 'id')
+
+      const formattedUnits = data.map((unit: UnitDataType) => ({
+        ...unit,
+        companyName: companyNameArray[unit.companyId],
+      }))
 
       unstable_batchedUpdates(() => {
-        setApiData(data)
-        setData(data)
+        setApiData(formattedUnits)
+        setData(formattedUnits)
       })
     } catch {
-      toast.error('Falha ao carregar as empresas.')
+      toast.error('Falha ao carregar as unidades.')
     } finally {
       setIsLoading(false)
     }
@@ -80,7 +89,7 @@ const Companies = () => {
           display: 'flex',
         }}
       >
-        Nova empresa <PlusCircleFilled style={{ marginLeft: '6px' }} />
+        Nova unidade <PlusCircleFilled style={{ marginLeft: '6px' }} />
       </Typography>
       <Col style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
         <Typography
@@ -91,7 +100,7 @@ const Companies = () => {
             marginTop: '20px',
           }}
         >
-          Empresas parceiras
+          Unidades associadas
         </Typography>
         <Row justify="center" style={{ marginTop: '10px' }}>
           {data?.map((item) => (
@@ -108,14 +117,14 @@ const Companies = () => {
                 cursor: 'pointer',
                 alignItems: 'center',
               }}
-              onClick={() => router.push(`/companies/${item.id}`)}
+              onClick={() => router.push(`/units/${item.id}`)}
               span={xl ? 6 : lg ? 12 : 18}
             >
               <Image
                 src="/company.jpg"
                 preview={false}
                 width="75%"
-                height="85%"
+                height="75%"
                 style={{
                   borderRadius: '5px',
                 }}
@@ -125,21 +134,26 @@ const Companies = () => {
               <Typography
                 style={{
                   fontSize: '24px',
-                  padding: '10px 0px',
+                  padding: '10px 0px 0px 0px',
                 }}
               >
                 {item.name}
+              </Typography>
+              <Typography
+                style={{
+                  fontSize: '18px',
+                  padding: '0px'
+                }}
+              >
+                Empresa: {item.companyName}
               </Typography>
             </Col>
           ))}
         </Row>
       </Col>
-      <AddCompanyModal
-        setIsModalOpen={setIsModalOpen}
-        isModalOpen={isModalOpen}
-      />
+      <AddUnitModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} />
     </>
   )
 }
 
-export default Companies
+export default Units
