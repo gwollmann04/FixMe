@@ -91,7 +91,7 @@ const AddWorkOrderModal = ({ isModalOpen, setIsModalOpen, assets }: ModalProps) 
             style={{ maxWidth: '100%' }}
             rules={[{ required: true, message: 'Insira o número de usuários' }]}
           >
-            <Input />
+            <Input type='number'/>
           </Form.Item>
           <Form.Item
             style={{ maxWidth: '100%' }}

@@ -1,4 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Informações Gerais:
+
+Projeto feito utilizando NextJS e Ant Design com intuito de construir uma aplicação para de monitoramentos de equipamentos.
+
+Trata-se de uma interface responsiva para controle e monitoramntos de equipamentos dos mais variados. 
+São disponibilizadas CRUDs para todas áreas da aplicação:
+
+- Empresas
+- Unidades
+- Usuários
+- Equipamentos
+- Ordens de Serviço
+
+É utilizada uma API externa para consumir os dados, além de em algumas telas serem disponibilizados dados mockados para validar a responsividade.
+
+Além disso também foi feito deploy da aplicação no Netlify, é possível acessá-la através do link:
+- [FixMe](https://fixmewebapp.netlify.app/)
+
+## 🛠 Tecnologias
+
+- [Next.JS](https://nextjs.org/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Ant Design](https://ant.design/)
+- [HighCharts](https://www.highcharts.com/)
 
 ## Getting Started
 
