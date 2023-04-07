@@ -113,6 +113,7 @@ const CompanyInternal = ({ id }: ParsedUrlQuery) => {
         setIsModalOpen={setIsEditModalOpen}
         isModalOpen={isEditModalOpen}
         id={String(id)}
+        companyData={data as CompanyDataType}
       />
       <DeleteModal
         setIsModalOpen={setIsDeleteModalOpen}

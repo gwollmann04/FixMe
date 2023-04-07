@@ -9,7 +9,7 @@ import { UnitDataType, UnitDataFormattedType } from '@/src/@types/units'
 import { unstable_batchedUpdates } from 'react-dom'
 import { mockedUnitsData } from '@/src/utils/constants'
 import { AddUnitModal } from '@/src/components'
-import { convertCompanyArrayToObject } from '@/src/utils/formatters'
+import { convertArrayToObject } from '@/src/utils/formatters'
 
 const { useBreakpoint } = Grid
 
@@ -37,7 +37,7 @@ const Units = () => {
       const { data } = await api.get('/units')
       const response = await api.get('/companies')
 
-      const companyNameArray = convertCompanyArrayToObject(response.data, 'id')
+      const companyNameArray = convertArrayToObject(response.data, 'id')
 
       const formattedUnits = data.map((unit: UnitDataType) => ({
         ...unit,

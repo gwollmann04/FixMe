@@ -4,15 +4,16 @@ import type { FormInstance } from 'antd/es/form'
 import { toast } from 'react-toastify'
 
 import { api } from '@/src/providers/api'
-import { createCompanyDataType } from '@/src/@types/companies'
+import { CompanyDataType, createCompanyDataType } from '@/src/@types/companies'
 
 interface ModalProps {
   isModalOpen: boolean
   setIsModalOpen: Dispatch<SetStateAction<boolean>>
   id: string
+  companyData: CompanyDataType
 }
 
-const EditCompanyModal = ({ isModalOpen, setIsModalOpen, id }: ModalProps) => {
+const EditCompanyModal = ({ isModalOpen, setIsModalOpen, id, companyData }: ModalProps) => {
   const [isLoading, setIsLoading] = useState(false)
 
   const formRef = useRef<FormInstance>(null)
@@ -58,6 +59,7 @@ const EditCompanyModal = ({ isModalOpen, setIsModalOpen, id }: ModalProps) => {
             <Form.Item
               label="Nome"
               name="name"
+              initialValue={companyData?.name}
               style={{ maxWidth: '100%' }}
               rules={[
                 { required: true, message: 'Insira o novo nome da empresa' },

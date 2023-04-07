@@ -1,9 +1,10 @@
-export const convertCompanyArrayToObject = (array: any, key: string) => {
-    const initialValue = {}
-    return array.reduce((obj: any, item: { [x: string]: any; name: string }) => {
+
+export const convertArrayToObject = (array: any[], key: string) => {
+    const initialValue = {};
+    return array.reduce((obj, item) => {
       return {
+        ...obj,
         [item[key]]: item.name,
-      }
-    }, initialValue)
-  }
-  
+      };
+    }, initialValue);
+  };

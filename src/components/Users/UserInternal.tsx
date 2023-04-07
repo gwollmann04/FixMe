@@ -4,15 +4,15 @@ import { useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { EditOutlined, CloseCircleFilled } from '@ant-design/icons'
 
-import { UnitDataFormattedType } from '@/src/@types/units'
+import { UserDataFormattedType } from '@/src/@types/users'
 import { api } from '@/src/providers/api'
-import { DeleteModal, EditUnitModal } from '@/src/components'
+import { DeleteModal, EditUserModal } from '@/src/components'
 import { convertArrayToObject } from '@/src/utils/formatters'
 
 const { useBreakpoint } = Grid
 
-const UnitInternal = ({ id }: ParsedUrlQuery) => {
-  const [data, setData] = useState<UnitDataFormattedType>()
+const UserInternal = ({ id }: ParsedUrlQuery) => {
+  const [data, setData] = useState<UserDataFormattedType>()
   const [isLoading, setIsLoading] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
@@ -22,19 +22,25 @@ const UnitInternal = ({ id }: ParsedUrlQuery) => {
   const loadData = useCallback(async () => {
     setIsLoading(true)
     try {
-      const { data } = await api.get(`/units/${id}`)
-      const response = await api.get('/companies')
+      const { data } = await api.get(`/users/${id}`)
+      const responseCompanies = await api.get('/companies')
+      const responseUnits = await api.get('/units')
 
-      const companyNameArray = convertArrayToObject(response.data, 'id')
+      const companyNameArray = convertArrayToObject(
+        responseCompanies.data,
+        'id',
+      )
+      const unitNameArray = convertArrayToObject(responseUnits.data, 'id')
 
-      const formattedUnits ={
+      const formattedUnits = {
         ...data,
         companyName: companyNameArray[data.companyId],
+        unitName: unitNameArray[data.unitId],
       }
 
       return setData(formattedUnits)
     } catch {
-      toast.error('Falha ao carregar dados da unidade.')
+      toast.error('Falha ao carregar dados do usuário.')
     } finally {
       setIsLoading(false)
     }
@@ -85,7 +91,7 @@ const UnitInternal = ({ id }: ParsedUrlQuery) => {
 
       <Row justify="center" align="middle">
         <Image
-          src="/company.jpg"
+          src="https://github.com/gwollmann04.png"
           preview={false}
           style={{
             borderRadius: '40%',
@@ -107,32 +113,32 @@ const UnitInternal = ({ id }: ParsedUrlQuery) => {
           </Typography>
           <Divider />
           <Typography style={{ justifyContent: 'flex-start' }}>
-           Empresa: <Typography>{data?.companyName}</Typography>
+            Email: <Typography>{data?.email}</Typography>
           </Typography>
           <Divider />
           <Typography style={{ justifyContent: 'flex-start' }}>
-            Criada em: <Typography>2012</Typography>
+            Empresa: <Typography>{data?.companyName}</Typography>
           </Typography>
           <Divider />
           <Typography style={{ justifyContent: 'flex-start' }}>
-            Fundador: <Typography>John Doe</Typography>
+            Unidade: <Typography>{data?.unitName}</Typography>
           </Typography>
         </Col>
       </Row>
-      <EditUnitModal
+      <EditUserModal
         setIsModalOpen={setIsEditModalOpen}
         isModalOpen={isEditModalOpen}
         id={String(id)}
-        unitData={data as UnitDataFormattedType}
+        userData={data as UserDataFormattedType}
       />
       <DeleteModal
         setIsModalOpen={setIsDeleteModalOpen}
         isModalOpen={isDeleteModalOpen}
-        modalTitle="unidade"
-        url={`/units/${id}`}
+        modalTitle="usuário"
+        url={`/users/${id}`}
       />
     </>
   )
 }
 
-export default UnitInternal
+export default UserInternal
