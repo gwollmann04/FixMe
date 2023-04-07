@@ -95,3 +95,18 @@ export const workOrderStatus = [
     label: 'Em Andamento',
   },
 ]
+
+export const assetStatus = [
+  {
+    value: 'inAlert',
+    label: 'Em alerta',
+  },
+  {
+    value: 'inDowntime',
+    label: 'Inativo',
+  },
+  {
+    value: 'inOperation',
+    label: 'Ativo',
+  },
+]

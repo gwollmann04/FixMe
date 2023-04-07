@@ -19,3 +19,15 @@ export const handlePriority = (priority: string) => {
 
 export const handleCheckListStatus = (status: boolean) =>
   status ? 'Concluído' : 'Em progresso'
+
+  
+export const handleAssetModel = (model: string) => {
+  if (model === 'motor') return 'Motor'
+  if (model === 'fan') return 'Ventoinha'
+}
+
+export const handleAssetStatus = (status: string) => {
+  if (status === 'inAlert') return 'Em alerta'
+  if (status === 'inDowntime') return 'Inativo'
+  if (status === 'inOperation') return 'Ativo'
+}

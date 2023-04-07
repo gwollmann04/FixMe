@@ -1,4 +1,4 @@
-import { Row, Typography, Col, Divider, Spin, Grid, Table } from 'antd'
+import { Row, Typography, Col, Divider, Spin, Table } from 'antd'
 import { ParsedUrlQuery } from 'querystring'
 import { useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
@@ -21,8 +21,6 @@ import {
   FormattedWorkOrderDataType,
 } from '@/src/@types/workorders'
 import type { ColumnsType } from 'antd/es/table'
-
-const { useBreakpoint } = Grid
 
 const columns: ColumnsType<CheckListType> = [
   {
@@ -66,8 +64,6 @@ const WorkOrderInternal = ({ id }: ParsedUrlQuery) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
-
-  const { xs } = useBreakpoint()
 
   const loadData = useCallback(async () => {
     setIsLoading(true)

@@ -31,7 +31,7 @@ const items: MenuItem[] = [
   getMenuOption('Empresas', '/companies', <PieChartOutlined />),
   getMenuOption('Unidades', '/units', <ShopOutlined />),
   getMenuOption('Usuários', '/users', <UserOutlined />),
-  getMenuOption('Equipamentos', '/assets', <ToolOutlined />),
+  getMenuOption('Equipamentos', '/equipments', <ToolOutlined />),
   getMenuOption('Ordens de Serviço', '/work-orders', <UnorderedListOutlined />),
 ]
 
