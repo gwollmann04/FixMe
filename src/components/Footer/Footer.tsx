@@ -28,10 +28,10 @@ const Footer = () => {
         E-mail:
         <Link
           onClick={(event) => notify(event)}
-          href="atendimento@fixme.com.br"
+          href="gwollmann04@gmail.com.br"
         >
           {' '}
-          atendimento@fixme.com.br
+          gwollmann04@gmail.com.br
         </Link>
       </Typography>
 

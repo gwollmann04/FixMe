@@ -16,7 +16,7 @@ export declare type AssetsDataType = {
   unitId: number
 }
 
-export declare type healthHistoryDataType = {
+export declare type HealthHistoryDataType = {
   status: string
   timestamp: string
 }
@@ -27,11 +27,10 @@ export declare type MetricsDataType = {
   totalUptime: number
 }
 
-
 export declare type FormattedAssetsDataType = {
   assignedUserIds: Array<number>
   companyId: number
-  healthHistory: Array<healthHistoryDataType>
+  healthHistory: Array<HealthHistoryDataType>
   healthscore: number
   id: number
   image: string
@@ -46,6 +45,10 @@ export declare type FormattedAssetsDataType = {
   unitId: number
   unitName: string
   companyName: string
+  inAlertNumber: number
+  inDowntimeNumber: number
+  inOperationNumber: number
+  unplannedStopNumber: number
 }
 
 export declare type createAssetDataType = {

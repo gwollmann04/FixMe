@@ -131,7 +131,7 @@ const Units = () => {
                 style={{
                   borderRadius: '5px',
                 }}
-                alt="Home Logo"
+                alt="Unit Logo"
               />
               <Divider style={{ margin: '0px' }} />
               <Typography

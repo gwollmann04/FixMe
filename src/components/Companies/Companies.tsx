@@ -119,7 +119,7 @@ const Companies = () => {
                 style={{
                   borderRadius: '5px',
                 }}
-                alt="Home Logo"
+                alt="Company Logo"
               />
               <Divider style={{ margin: '0px' }} />
               <Typography

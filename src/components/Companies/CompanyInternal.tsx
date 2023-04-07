@@ -83,7 +83,7 @@ const CompanyInternal = ({ id }: ParsedUrlQuery) => {
             boxShadow: '1px 1px 30px 5px #001529',
             background: '#001529',
           }}
-          alt="Home Logo"
+          alt="Company Logo"
         />
         <Col
           style={{

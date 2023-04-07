@@ -30,4 +30,5 @@ export const handleAssetStatus = (status: string) => {
   if (status === 'inAlert') return 'Em alerta'
   if (status === 'inDowntime') return 'Inativo'
   if (status === 'inOperation') return 'Ativo'
+  if (status === 'unplannedStop') return 'Parada não planejada'
 }
