@@ -13,7 +13,6 @@ import {
   handleAssetModel,
   handleAssetStatus,
 } from '@/src/utils/formatters'
-import { FormattedWorkOrderDataType } from '@/src/@types/workorders'
 import {
   FormattedAssetsDataType,
   HealthHistoryDataType,
@@ -41,7 +40,7 @@ const getOptions = (
   series: [
     {
       type: 'pie',
-      name: 'Browser share',
+      name: 'Nº de ocorrências',
       data: [
         ['Inativo', data?.inDowntimeNumber],
         ['Ativo', data?.inOperationNumber],
@@ -170,7 +169,7 @@ const AssetInternal = ({ id }: ParsedUrlQuery) => {
               padding: '12px',
               boxShadow: '1px 1px 30px 5px #001529',
               background: '#001529',
-              maxHeight: '300px'
+              maxHeight: '300px',
             }}
             alt="Home Logo"
           />
